@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MarcouEvento.Domain.Entities
 {
-    public class Address
+    public sealed class Address
     {
         public string Id { get; private set; }
         public string Street { get; private set; }
@@ -32,6 +32,19 @@ namespace MarcouEvento.Domain.Entities
             ZipCode = zipCode;
             Latitude = latitude;
             Longitude = longitude;
+            Complement = complement;
+
+            Validate();
+        }
+
+        public Address(string street, int number, string neighborhood, string city, string state, string zipCode, string complement)
+        {
+            Street = street;
+            Number = number;
+            Neighborhood = neighborhood;
+            City = city;
+            State = state;
+            ZipCode = zipCode;
             Complement = complement;
 
             Validate();
@@ -86,10 +99,10 @@ namespace MarcouEvento.Domain.Entities
             DomainExceptionValidationAddress.When(string.IsNullOrWhiteSpace(City), "City is required.");
 
             DomainExceptionValidationAddress.When(string.IsNullOrWhiteSpace(State), "State is required.");
-            DomainExceptionValidationAddress.When(State.Length == 2, "Ivalid State! State have two chacters");
+            DomainExceptionValidationAddress.When(State.Length != 2, "Ivalid State! State have two chacters");
 
             DomainExceptionValidationAddress.When(string.IsNullOrWhiteSpace(ZipCode), "ZipCode is required.");
-            DomainExceptionValidationAddress.When(IsValidZipCode(), "Invalid ZipCode format. ZipCode must contain 8 digits in format XXXXX-XXX");
+            DomainExceptionValidationAddress.When(!IsValidZipCode(), "Invalid ZipCode format. ZipCode must contain 8 digits in format XXXXX-XXX");
         }
     }
 

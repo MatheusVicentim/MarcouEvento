@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace MarcouEvento.Domain.Validation
 {
-    public class DomainExceptionValidationAddress: Exception
+    public class DomainExceptionValidation: Exception
     {
-        public DomainExceptionValidationAddress(string error):base(error) { }
+        public DomainExceptionValidation(string error):base(error) { }
 
         public static void When(bool hasError, string error)
         {
             if (hasError) 
-                throw new DomainExceptionValidationAddress(error);
+                throw new DomainExceptionValidation(error);
         }
     }
 }

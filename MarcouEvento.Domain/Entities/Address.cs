@@ -96,13 +96,13 @@ namespace MarcouEvento.Domain.Entities
             //    throw new ValidationException(string.Join("; ", validationResults.ConvertAll(v => v.ErrorMessage)));
             //}
 
-            DomainExceptionValidationAddress.When(string.IsNullOrWhiteSpace(City), "City is required.");
+            DomainExceptionValidation.When(string.IsNullOrWhiteSpace(City), "City is required.");
 
-            DomainExceptionValidationAddress.When(string.IsNullOrWhiteSpace(State), "State is required.");
-            DomainExceptionValidationAddress.When(State.Length != 2, "Ivalid State! State have two chacters");
+            DomainExceptionValidation.When(string.IsNullOrWhiteSpace(State), "State is required.");
+            DomainExceptionValidation.When(State.Length != 2, "Ivalid State! State have two chacters");
 
-            DomainExceptionValidationAddress.When(string.IsNullOrWhiteSpace(ZipCode), "ZipCode is required.");
-            DomainExceptionValidationAddress.When(!IsValidZipCode(), "Invalid ZipCode format. ZipCode must contain 8 digits in format XXXXX-XXX");
+            DomainExceptionValidation.When(string.IsNullOrWhiteSpace(ZipCode), "ZipCode is required.");
+            DomainExceptionValidation.When(!IsValidZipCode(), "Invalid ZipCode format. ZipCode must contain 8 digits in format XXXXX-XXX");
         }
     }
 

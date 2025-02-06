@@ -1,16 +1,11 @@
 ﻿using FluentAssertions;
 using MarcouEvento.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MeuEvento.Domain.Test.AddressTeste
 {
     public class AddressTest1
     {
-        [Fact(DisplayName ="Create Address Witch Valid State")]
+        [Fact(DisplayName = "Create Address Witch Valid State")]
         public void CreateAddress_WithValidParameters_ResultObjectValidState()
         {
             Action action = () => new Address("R. Carlos Gomes", 574, "Centro", "São João das Duas Pontes", "SP", "15640047", "Casa");
@@ -26,7 +21,7 @@ namespace MeuEvento.Domain.Test.AddressTeste
                     .WithMessage("ZipCode is required.");
         }
 
-        [Fact(DisplayName ="Create Address ZipCode Invalid")]
+        [Fact(DisplayName = "Create Address ZipCode Invalid")]
         public void CreateAddress_WitchParametersZipCodeInvalid_ResultObjectInvalid()
         {
             Action action = () => new Address("R. Carlos Gomes", 574, "Centro", "São João das Duas Pontes", "SP", "156400047", "Casa");

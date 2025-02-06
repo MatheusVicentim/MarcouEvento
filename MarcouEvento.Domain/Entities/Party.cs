@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MarcouEvento.Domain.Entities
+﻿namespace MarcouEvento.Domain.Entities
 {
     public class Party
     {
@@ -43,7 +36,8 @@ namespace MarcouEvento.Domain.Entities
             Validate();
         }
 
-        private void Validate() { 
+        private void Validate()
+        {
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace MarcouEvento.Domain.Entities
+﻿using MarcouEvento.Domain.Validation;
+
+namespace MarcouEvento.Domain.Entities
 {
     public class Party
     {
@@ -11,7 +13,9 @@
         public int AddressId { get; private set; }
         public Address Address { get; private set; }
 
-        public Party(int id, string name, string description, DateTime dateStart, DateTime dateFinish, int addressId, Address address)
+        public List<Expense> Expenses { get; set; }
+
+        public Party(int id, string name, string description, DateTime dateStart, DateTime dateFinish, int addressId)
         {
             Id = id;
             Name = name;
@@ -19,25 +23,32 @@
             DateStart = dateStart;
             DateFinish = dateFinish;
             AddressId = addressId;
-            Address = address;
 
-            Validate();
+            Validateinsert();
         }
 
-        public Party(string name, string description, DateTime dateStart, DateTime dateFinish, int addressId, Address address)
+        public Party(int id, List<Expense> expenses)
         {
-            Name = name;
-            Description = description;
-            DateStart = dateStart;
-            DateFinish = dateFinish;
-            AddressId = addressId;
-            Address = address;
+            Id = id;
+            Expenses = expenses;
 
-            Validate();
+            ValidateExpenses();
         }
 
-        private void Validate()
+        private void Validateinsert()
         {
+            DomainExceptionValidation.When(string.IsNullOrWhiteSpace(Name), "Name is required.");
+
+            DomainExceptionValidation.When(DateStart == DateTime.MinValue, "DateStart is required.");
+
+            DomainExceptionValidation.When(DateFinish == DateTime.MinValue, "DateFinish is required.");
+
+            DomainExceptionValidation.When(AddressId == 0, "Addrress is required.");
+        }
+
+        private void ValidateExpenses()
+        {
+            DomainExceptionValidation.When(Expenses.Count == 0, "Expenses is required.");
         }
     }
 }

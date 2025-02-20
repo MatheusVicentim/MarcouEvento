@@ -4,7 +4,7 @@ namespace MarcouEvento.Domain.Entities
 {
     public sealed class Address
     {
-        public string Id { get; private set; }
+        public int Id { get; private set; }
         public string Street { get; private set; }
         public int Number { get; private set; }
         public string Neighborhood { get; private set; }
@@ -15,7 +15,7 @@ namespace MarcouEvento.Domain.Entities
         public string Longitude { get; private set; }
         public string Complement { get; private set; }
 
-        public Address(string id, string street, int number, string neighborhood, string city, string state, string zipCode, string latitude, string longitude, string complement)
+        public Address(int id, string street, int number, string neighborhood, string city, string state, string zipCode, string latitude, string longitude, string complement)
         {
             Id = id;
             Street = street;

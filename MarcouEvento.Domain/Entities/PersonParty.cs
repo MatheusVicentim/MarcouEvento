@@ -6,8 +6,18 @@ using System.Threading.Tasks;
 
 namespace MarcouEvento.Domain.Entities
 {
-    class PersonParty
+    public class PersonParty
     {
+        public enum EStatus
+        {
+            Cancelado,
+            Confirmado,
+            Pendente
+        }
+
+        public int Id { get; set; }
+        public EStatus Status { get; set; }
+
         public int PersonId { get; set; }
         public Person? Person { get; set; }
 

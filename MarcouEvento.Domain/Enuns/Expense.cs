@@ -1,4 +1,0 @@
-﻿namespace MarcouEvento.Domain.Enuns
-{
-  
-}

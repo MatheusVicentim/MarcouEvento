@@ -4,11 +4,18 @@ namespace MarcouEvento.Domain.Entities
 {
     public class Party
     {
+        public enum EStatus
+        {
+            Inactive,
+            Active
+        }
+
         public int Id { get; private set; }
         public string Name { get; private set; }
         public string Description { get; private set; }
         public DateTime DateStart { get; private set; }
         public DateTime DateFinish { get; private set; }
+        public EStatus Status { get; set; }
 
         public int AddressId { get; private set; }
         public Address Address { get; private set; }

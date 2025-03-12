@@ -31,7 +31,7 @@ namespace MarcouEvento.Domain.Entities
             DateFinish = dateFinish;
             AddressId = addressId;
 
-            Validateinsert();
+            ValidateInsert();
         }
 
         public Party(int id, List<Expense> expenses)
@@ -42,7 +42,7 @@ namespace MarcouEvento.Domain.Entities
             ValidateExpenses();
         }
 
-        private void Validateinsert()
+        private void ValidateInsert()
         {
             DomainExceptionValidation.When(string.IsNullOrWhiteSpace(Name), "Name is required.");
 

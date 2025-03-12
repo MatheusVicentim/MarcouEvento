@@ -80,7 +80,7 @@ namespace MarcouEvento.Domain.Entities
         private void Validate()
         {
             //Isso serve para validar Datas Anotation
-            //var validationContext = new ValidationContext(this);
+            //var validationContext = new ValidationContext(this);  
             //var validationResults = new System.Collections.Generic.List<ValidationResult>();
 
             //bool isValid = Validator.TryValidateObject(this, validationContext, validationResults, true);

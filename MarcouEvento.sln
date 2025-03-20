@@ -5,11 +5,15 @@ VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarcouEvento.Domain", "MarcouEvento.Domain\MarcouEvento.Domain.csproj", "{B63D93DF-EAEC-488A-82D2-B30EF56DDE12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeuEvento.Domain.Test", "MeuEvento.Domain.Test\MeuEvento.Domain.Test.csproj", "{6D522EE0-0F4D-4E8C-AD3E-8CC428373656}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarcouEvento.Domain.Test", "MeuEvento.Domain.Test\MarcouEvento.Domain.Test.csproj", "{6D522EE0-0F4D-4E8C-AD3E-8CC428373656}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarcouEvento.Infra.Data", "MarcouEvento.Infra.Data\MarcouEvento.Infra.Data.csproj", "{D814BFB8-A476-4063-A6EF-CC16EA7D9BE5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarcouEvento.Application", "MarcouEvento.Application\MarcouEvento.Application.csproj", "{7BE72924-323D-49DD-9B4F-AB7D87274C06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarcouEvento.WebUI", "MarcouEvento.WebUI\MarcouEvento.WebUI.csproj", "{6189D707-745B-4C51-805D-1481A651339A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarcouEvento.Infra.IoC", "MarcouEvento.Infra.IoC\MarcouEvento.Infra.IoC.csproj", "{B7091A88-DC06-48D2-B61A-FD3A46C2CF39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{7BE72924-323D-49DD-9B4F-AB7D87274C06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BE72924-323D-49DD-9B4F-AB7D87274C06}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BE72924-323D-49DD-9B4F-AB7D87274C06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6189D707-745B-4C51-805D-1481A651339A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6189D707-745B-4C51-805D-1481A651339A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6189D707-745B-4C51-805D-1481A651339A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6189D707-745B-4C51-805D-1481A651339A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7091A88-DC06-48D2-B61A-FD3A46C2CF39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7091A88-DC06-48D2-B61A-FD3A46C2CF39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7091A88-DC06-48D2-B61A-FD3A46C2CF39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7091A88-DC06-48D2-B61A-FD3A46C2CF39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

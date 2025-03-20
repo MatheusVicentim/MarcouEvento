@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeuEvento.Domain.Test", "Me
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarcouEvento.Infra.Data", "MarcouEvento.Infra.Data\MarcouEvento.Infra.Data.csproj", "{D814BFB8-A476-4063-A6EF-CC16EA7D9BE5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarcouEvento.Application", "MarcouEvento.Application\MarcouEvento.Application.csproj", "{7BE72924-323D-49DD-9B4F-AB7D87274C06}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{D814BFB8-A476-4063-A6EF-CC16EA7D9BE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D814BFB8-A476-4063-A6EF-CC16EA7D9BE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D814BFB8-A476-4063-A6EF-CC16EA7D9BE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BE72924-323D-49DD-9B4F-AB7D87274C06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BE72924-323D-49DD-9B4F-AB7D87274C06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BE72924-323D-49DD-9B4F-AB7D87274C06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BE72924-323D-49DD-9B4F-AB7D87274C06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

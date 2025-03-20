@@ -20,7 +20,7 @@ namespace MarcouEvento.Domain.Entities
         public int AddressId { get; private set; }
         public Address Address { get; private set; }
 
-        public List<Expense> Expenses { get; set; }
+        public IEnumerable<Expense> Expenses { get; set; }
 
         public Party(int id, string name, string description, DateTime dateStart, DateTime dateFinish, int addressId)
         {

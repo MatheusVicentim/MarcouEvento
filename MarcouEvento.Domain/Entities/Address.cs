@@ -2,7 +2,7 @@
 
 namespace MarcouEvento.Domain.Entities
 {
-    public sealed class Address
+    public class Address
     {
         public int Id { get; private set; }
         public string Street { get; private set; }

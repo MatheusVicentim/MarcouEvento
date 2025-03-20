@@ -1,4 +1,4 @@
-﻿using MarcouEvento.Domain.Entities;
+﻿        using MarcouEvento.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,6 +10,7 @@ namespace MarcouEvento.Infra.Data.EntitiesConfiguration
         {
             builder.HasKey(p => p.Id);
             builder.Property(x => x.Name).IsRequired().HasMaxLength(100);
+            builder.Property(x => x.Description).HasMaxLength(1000);
             builder.Property(x => x.DateStart).IsRequired();
             builder.Property(x => x.DateFinish).IsRequired();
 

@@ -19,6 +19,8 @@ public class Expense
     public int PartyId { get; private set; }
     public Party Party { get; private set; }
 
+    public Expense() { }
+
     public Expense(string? name, string? description, EType type, decimal value, int partyId)
     {
         Name = name;

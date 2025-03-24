@@ -34,7 +34,7 @@ namespace MarcouEvento.Domain.Entities
             ValidateInsert();
         }
 
-        public Party(int id, List<Expense> expenses)
+        public Party(int id, IEnumerable<Expense> expenses)
         {
             Id = id;
             Expenses = expenses;
@@ -55,7 +55,7 @@ namespace MarcouEvento.Domain.Entities
 
         private void ValidateExpenses()
         {
-            DomainExceptionValidation.When(Expenses.Count == 0, "Expenses is required.");
+            DomainExceptionValidation.When(Expenses is null, "Expenses is required.");
         }
     }
 }

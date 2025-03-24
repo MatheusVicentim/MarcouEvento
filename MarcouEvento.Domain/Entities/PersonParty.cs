@@ -18,8 +18,10 @@ public class PersonParty
     public int Id { get; set; }
     public EStatus Status { get; set; }
 
-    public int PersonId { get; set; }
-    public Person? Person { get; set; }
+    public int AdministratorId { get; set; }
+    public Administrator? Administrator { get; set; }
+    public int GuestId { get; set; }
+    public Guest? Guest { get; set; }
 
     public int PartyId { get; set; }
     public Party? Party { get; set; }

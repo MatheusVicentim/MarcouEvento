@@ -14,7 +14,6 @@ public class ApplicationDbContext : DbContext
     public DbSet<Expense> Expenses { get; set; }
     public DbSet<Guest> Guests { get; set; }
     public DbSet<Party> Parties { get; set; }
-    public DbSet<Person> People { get; set; }
     public DbSet<PersonParty> PersonParties { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)

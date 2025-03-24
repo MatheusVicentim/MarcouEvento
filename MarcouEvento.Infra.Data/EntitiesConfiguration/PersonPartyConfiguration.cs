@@ -16,9 +16,14 @@ namespace MarcouEvento.Infra.Data.EntitiesConfiguration
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Status).HasConversion<int>().HasMaxLength(1).IsRequired();
 
-            builder.HasOne(x => x.Person)
+            builder.HasOne(x => x.Administrator)
                 .WithMany()
-                .HasForeignKey(y => y.PersonId)
+                .HasForeignKey(y => y.AdministratorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(x => x.Guest)
+                .WithMany()
+                .HasForeignKey(y => y.GuestId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.Party)

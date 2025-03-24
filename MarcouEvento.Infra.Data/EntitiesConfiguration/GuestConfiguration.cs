@@ -11,7 +11,6 @@ public class GuestConfiguration : IEntityTypeConfiguration<Guest>
         builder.HasKey(x => x.Id);
         builder.Property(x => x.FullName).HasMaxLength(300).IsRequired();
         builder.Property(x => x.Phone).HasMaxLength(15).IsRequired();
-        builder.Property(x => x.PersonLevel).HasMaxLength(1).IsRequired();
         builder.Property(x => x.Status).HasMaxLength(1).IsRequired();
 
         builder.HasOne(x => x.Address)

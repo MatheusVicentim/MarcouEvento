@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MarcouEvento.Application\MarcouEvento.Application.csproj" />
     <ProjectReference Include="..\MarcouEvento.Domain\MarcouEvento.Domain.csproj" />
   </ItemGroup>
 

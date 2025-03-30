@@ -2,7 +2,7 @@
 
 namespace MarcouEvento.Domain.Interface;
 
-public interface IParty
+public interface IPartyRepository
 {
     Task<IEnumerable<Party>> Get();
     Task<Party> GetById(int id);

@@ -2,7 +2,7 @@
 
 namespace MarcouEvento.Domain.Interface;
 
-public interface IAdministrator
+public interface IAdministratorRepository
 {
     Task<IEnumerable<Administrator>> Get();
     Task<Administrator> GetById(int id);

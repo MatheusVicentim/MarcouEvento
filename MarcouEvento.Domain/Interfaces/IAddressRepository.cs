@@ -2,7 +2,7 @@
 
 namespace MarcouEvento.Domain.Interface;
 
-public interface IAddress
+public interface IAddressRepository
 {
     Task<IEnumerable<Address>> Get();
     Task<Address> GetById(int id);

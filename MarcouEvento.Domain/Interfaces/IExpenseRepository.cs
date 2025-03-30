@@ -2,7 +2,7 @@
 
 namespace MarcouEvento.Domain.Interface;
 
-public interface IExpense
+public interface IExpenseRepository
 {
     Task<IEnumerable<Expense>> Get();
     Task<Expense> GetById(int id);

@@ -4,7 +4,7 @@ namespace MarcouEvento.Domain.Interface;
 
 public interface IAdministratorRepository
 {
-    Task<IEnumerable<Administrator>> Get();
+    Task<IEnumerable<Administrator>> GetAllAdministrators();
     Task<Administrator> GetById(int id);
     Task<Administrator> Create(Administrator administrator);
     Task<Administrator> Update(Administrator administrator);

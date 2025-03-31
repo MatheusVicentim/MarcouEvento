@@ -4,7 +4,7 @@ namespace MarcouEvento.Domain.Interface;
 
 public interface IExpenseRepository
 {
-    Task<IEnumerable<Expense>> Get();
+    Task<IEnumerable<Expense>> GetAllExpenses();
     Task<Expense> GetById(int id);
     Task<Expense> Create(Expense expense);
     Task<Expense> Update(Expense expense);

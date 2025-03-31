@@ -4,7 +4,7 @@ namespace MarcouEvento.Domain.Interface;
 
 public interface IAddressRepository
 {
-    Task<IEnumerable<Address>> Get();
+    Task<IEnumerable<Address>> GetAddresses();
     Task<Address> GetById(int id);
     Task<Address> Create(Address address);
     Task<Address> Update(Address address);

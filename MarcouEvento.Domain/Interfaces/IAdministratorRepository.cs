@@ -9,7 +9,7 @@ public interface IAdministratorRepository
     Task<Administrator> Create(Administrator administrator);
     Task<Administrator> Update(Administrator administrator);
     Task<Administrator> Delete(Administrator administrator);
-    Task<Administrator> ActivateParty();
+    Task<Administrator> Activate(int id);
     //Task<Administrator> ActivateParty();
     //Task<Administrator> InactiveParty();
 }

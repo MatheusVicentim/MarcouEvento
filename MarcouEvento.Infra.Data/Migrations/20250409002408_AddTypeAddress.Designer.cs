@@ -4,6 +4,7 @@ using MarcouEvento.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarcouEvento.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250409002408_AddTypeAddress")]
+    partial class AddTypeAddress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,22 +78,6 @@ namespace MarcouEvento.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Addresses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            City = "São João das Duas Pontes",
-                            Complement = "Casa",
-                            Latitude = "",
-                            Longitude = "",
-                            Neighborhood = "Centro",
-                            Number = 574,
-                            State = "UF",
-                            Street = "R. Carlos Gomes",
-                            Type = 0,
-                            ZipCode = "15640047"
-                        });
                 });
 
             modelBuilder.Entity("MarcouEvento.Domain.Entities.Administrator", b =>

@@ -12,6 +12,9 @@ class AddressConfigurarion : IEntityTypeConfiguration<Address>
         builder.Property(x=> x.Neighborhood).HasMaxLength(1000);
         builder.Property(x=> x.City).HasMaxLength(1000).IsRequired();
         builder.Property(x=> x.State).HasMaxLength(2).IsRequired();
-        builder.Property(x=> x.ZipCode).HasMaxLength(8).IsRequired();        
+        builder.Property(x=> x.ZipCode).HasMaxLength(8).IsRequired();
+
+
+        builder.HasData(new Address(1,"R. Carlos Gomes", 574, "Centro", "São João das Duas Pontes", "UF", "15640047","","","Casa"));
     }
 }

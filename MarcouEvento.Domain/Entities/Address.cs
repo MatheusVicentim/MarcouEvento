@@ -1,20 +1,11 @@
 ﻿using MarcouEvento.Domain.Validation;
+using System.ComponentModel;
+using System.Reflection;
 
 namespace MarcouEvento.Domain.Entities
 {
     public class Address
     {
-        public int Id { get; private set; }
-        public string Street { get; private set; }
-        public int Number { get; private set; }
-        public string Neighborhood { get; private set; }
-        public string City { get; private set; }
-        public string State { get; private set; }
-        public string ZipCode { get; private set; }
-        public string Latitude { get; private set; }
-        public string Longitude { get; private set; }
-        public string Complement { get; private set; }
-
         public Address(int id, string street, int number, string neighborhood, string city, string state, string zipCode, string latitude, string longitude, string complement)
         {
             Id = id;
@@ -59,6 +50,33 @@ namespace MarcouEvento.Domain.Entities
             Validate();
         }
 
+        public enum EType
+        {
+            [Description("Residencial")]
+            Residential = 1,
+
+            [Description("Comercial")]
+            Commercial = 2,
+
+            [Description("Industrial")]
+            Industrial = 3,
+
+            [Description("Rural")]
+            Rural = 4
+        }
+
+        public int Id { get; private set; }
+        public string Street { get; private set; }
+        public EType Type { get; private set; }
+        public int Number { get; private set; }
+        public string Neighborhood { get; private set; }
+        public string City { get; private set; }
+        public string State { get; private set; }
+        public string ZipCode { get; private set; }
+        public string Latitude { get; private set; }
+        public string Longitude { get; private set; }
+        public string Complement { get; private set; }
+
         private bool IsValidZipCode()
         {
             var zipCode = new string(ZipCode.Where(char.IsDigit).ToArray());
@@ -98,6 +116,23 @@ namespace MarcouEvento.Domain.Entities
             DomainExceptionValidation.When(string.IsNullOrWhiteSpace(ZipCode), "ZipCode is required.");
             DomainExceptionValidation.When(!IsValidZipCode(), "Invalid ZipCode format. ZipCode must contain 8 digits in format XXXXX-XXX");
         }
-    }
+                     
 
+        public static string GetEnumDescription<TEnum>(TEnum value) where TEnum : Enum
+        {
+            FieldInfo? field = value.GetType().GetField(value.ToString());
+
+            if (field != null)
+            {
+                DescriptionAttribute? attribute = Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) as DescriptionAttribute;
+
+                if (attribute != null)
+                {
+                    return attribute.Description;
+                }
+            }
+
+            return value.ToString();
+        }
+    }
 }

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using MarcouEvento.Application.DTOs;
+using MarcouEvento.Application.InputModels;
 using MarcouEvento.Application.Interfaces;
+using MarcouEvento.Application.ViewModels;
 using MarcouEvento.Domain.Entities;
 using MarcouEvento.Domain.Interface;
 
@@ -34,17 +36,26 @@ public class AddressService : IAddressService
         await _addressRepository.Delete(addressEntity);
     }
 
-    public async Task<IEnumerable<AddressDTO>> GetAddresses()
+    public async Task<IEnumerable<AddressViewModel>> GetAddresses()
     {
         var addressesEntity = await _addressRepository.GetAddresses();
 
-        return _mapper.Map<IEnumerable<AddressDTO>>(addressesEntity);
+        var addressesViewModel = addressesEntity.Select(x =>
+           new AddressViewModel(x.Id, x.Type, x.Street, x.Number, x.Neighborhood, x.City, x.State, x.ZipCode, x.Latitude, x.Longitude, x.Complement)
+        );
+
+        return addressesViewModel;
     }
 
     public async Task<AddressDTO> GetById(int id)
     {
         var addressEntity = await _addressRepository.GetById(id);
         return _mapper.Map<AddressDTO>(addressEntity);
+    }
+
+    public CadastrarAddressInputModel PreparaInsert()
+    {
+        return new CadastrarAddressInputModel();
     }
 
     public async Task Update(AddressDTO addressDTO)

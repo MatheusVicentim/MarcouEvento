@@ -1,15 +1,20 @@
-﻿using MarcouEvento.Domain.Entities;
+﻿using MarcouEvento.Application.DTOs;
+using MarcouEvento.Domain.Entities;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using static MarcouEvento.Domain.Entities.Address;
 
-namespace MarcouEvento.Application.DTOs;
+namespace MarcouEvento.Application.InputModels;
 
-public class AddressDTO
+public class CadastrarAddressInputModel
 {
-    public int Id { get; set; }
+    public CadastrarAddressInputModel()
+    {
+        TypeOptions = GetTypeOptions();
+    }
 
     public Address.EType Type { get; set; }
-    public IEnumerable<Address.EType> Types { get; set; }
+    public IEnumerable<AddressTypeOption> TypeOptions { get; set; }
 
     [RequiredIf($"{nameof(Latitude)},{nameof(Longitude)}"
         , ErrorMessage = "Rua deve ser preenchido quando Latitude/Longitude não for fornecida")]
@@ -47,35 +52,22 @@ public class AddressDTO
 
     [DisplayName("Complemento")]
     public string? Complement { get; private set; }
-}
 
 
-public class RequiredIfAttribute : ValidationAttribute
-{
-    private readonly string _dependentProperties;
-
-    public RequiredIfAttribute(string dependentProperty)
+    // Método que retorna todas as opções de enum com status de seleção
+    private List<AddressTypeOption> GetTypeOptions()
     {
-        _dependentProperties = dependentProperty;
-    }
-
-    protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-    {
-        foreach (string _dependentProperty in _dependentProperties.Split(","))
-        {
-            var dependentValue = validationContext.ObjectType.GetProperty(_dependentProperty).GetValue(validationContext.ObjectInstance, null);
-            if (string.IsNullOrWhiteSpace(dependentValue?.ToString()) && string.IsNullOrWhiteSpace(value?.ToString()))
+        var options = Enum.GetValues(typeof(EType))
+            .Cast<EType>()
+            .Select(t => new AddressTypeOption
             {
-                return new ValidationResult(ErrorMessage ?? $"Campo obrigatório quando {_dependentProperty} não está preenchido");
-            }
-        }
-        //var dependentValue = validationContext.ObjectType.GetProperty(_dependentProperties).GetValue(validationContext.ObjectInstance, null);
+                Value = (int)t,
+                Name = t.ToString(),
+                Description = GetEnumDescription(t),
+                IsSelected = (this.Type == t)  // Verifica se é o tipo atual selecionado
+            })
+            .ToList();
 
-        //if (string.IsNullOrWhiteSpace(dependentValue?.ToString()) && string.IsNullOrWhiteSpace(value?.ToString()))
-        //{
-        //    return new ValidationResult(ErrorMessage ?? $"Campo obrigatório quando {_dependentProperties} não está preenchido");
-        //}
-
-        return ValidationResult.Success;
+        return options;
     }
 }

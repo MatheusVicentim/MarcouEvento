@@ -19,9 +19,12 @@ public class AddressService : IAddressService
         _mapper = mapper;
     }
 
-    public async Task Add(AddressDTO addressDTO)
+    public async Task Add(CadastrarAddressInputModel cadastrarAddressInputModel)
     {
-        var addressEntity = _mapper.Map<Address>(addressDTO);
+        var addressEntity = new Address(cadastrarAddressInputModel.City, cadastrarAddressInputModel.State,
+            cadastrarAddressInputModel.ZipCode, cadastrarAddressInputModel.Latitude, cadastrarAddressInputModel.Longitude,
+            cadastrarAddressInputModel.Complement, cadastrarAddressInputModel.UrlMaps);
+
         await _addressRepository.Create(addressEntity);
     }
 

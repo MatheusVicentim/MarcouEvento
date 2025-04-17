@@ -9,7 +9,7 @@ public interface IAddressService
     Task<IEnumerable<AddressViewModel>> GetAddresses();
     Task<AddressDTO> GetById(int id);
     CadastrarAddressInputModel PreparaInsert();
-    Task Add(AddressDTO addressDTO);
+    Task Add(CadastrarAddressInputModel cadastrarAddressInputModel);
     Task Update(AddressDTO addressDTO);
     Task Delete(int id);
 }

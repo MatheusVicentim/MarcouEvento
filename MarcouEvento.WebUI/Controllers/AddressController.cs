@@ -1,4 +1,5 @@
 ﻿using MarcouEvento.Application.DTOs;
+using MarcouEvento.Application.InputModels;
 using MarcouEvento.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,13 +30,13 @@ public class AddressController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(AddressDTO addressDTO)
+    public async Task<IActionResult> Create(CadastrarAddressInputModel cadastrarAddressInputModel)
     {
         if (ModelState.IsValid)
         {
-            await _addressService.Add(addressDTO);
+            await _addressService.Add(cadastrarAddressInputModel);
             return RedirectToAction(nameof(Index));
         }
-        return View(addressDTO);
+        return View(cadastrarAddressInputModel);
     }
 }

@@ -50,8 +50,11 @@ public class CadastrarAddressInputModel
     public string? Latitude { get; set; }
     public string? Longitude { get; set; }
 
+    [DisplayName("Url Maps")]
+    public string? UrlMaps { get; set; }
+
     [DisplayName("Complemento")]
-    public string? Complement { get; private set; }
+    public string? Complement { get; set; }
 
 
     // Método que retorna todas as opções de enum com status de seleção

@@ -9,8 +9,16 @@
         display: inline-block;
     }
 
+    .in-line-flex {
+        display: inline-flex;
+    }
+
     .center-buttons {
         text-align: center;
+    }
+
+    .m-l-1 {
+        margin-left: 1rem;
     }
 </style>
 
@@ -81,19 +89,30 @@
 
             <div class="address-rural-4" style="display:none;">
                 <div class="row g-2">
-                    <div class="form-floating mb-3 col-md-5 in-line-block">
+                    <div class="form-floating mb-3 col-md-6 in-line-block">
                         <input asp-for="Latitude" class="form-control" placeholder="" />
                         <label asp-for="Latitude"></label>
                         <span asp-validation-for="Latitude" class="text-danger"></span>
                     </div>
-                </div>
-                <div class="row g-2">
-                    <div class="form-floating mb-3 col-md-5 in-line-block">
+
+                    <div class="form-floating mb-3 col-md-6 in-line-block">
                         <input asp-for="Longitude" class="form-control" placeholder="" />
                         <label asp-for="Longitude"></label>
                         <span asp-validation-for="Longitude" class="text-danger"></span>
                     </div>
                 </div>
+            </div>
+        </div>
+
+
+        <div class="row g-2">
+            <div class="form-floating mb-3 col-md-12 in-line-flex">
+                <input asp-for="UrlMaps" class="form-control" placeholder="" onchange="habilitaBtnUrlMaps(this)" />
+                <label asp-for="UrlMaps"></label>
+                <span asp-validation-for="UrlMaps" class="text-danger"></span>
+                <button type="button" class="btn btn-info m-l-1" style="width:50px;" id="openUrlMaps" onclick="openUrl()">
+                    <i class="fa-solid fa-location-dot"></i>
+                </button>
             </div>
         </div>
 
@@ -104,6 +123,9 @@
                 <span asp-validation-for="Complement" class="text-danger"></span>
             </div>
         </div>
+    </div>
+    <div class="row g-2">
+        <button type="submit" class="btn btn-primary">Registrar</button>
     </div>
 </form>
 
@@ -127,5 +149,33 @@
                 dadosAddress.style.display = "block";
                 dadosAddressRural.style.display = "none";
         }
+    };
+
+    function openUrl(){
+        const url = document.getElementById('UrlMaps').value.trim();
+
+        if(url){
+            window.open(url, '_blank');
+        }
+    };
+
+    /**
+    *
+    *
+    * @@param {HTMLInputElement} element - Descrição de possíveis exceções lançadas
+    */
+    function habilitaBtnUrlMaps(element){
+        const url = element.value;
+        const btnUrl = document.getElementById('openUrlMaps');
+        if(url){
+            let formattedUrl = url;
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                btnUrl.setAttribute('disabled', true);
+            }else{
+                btnUrl.removeAttribute('disabled');
+            }
+        }else{
+            btnUrl.setAttribute('disabled', true);
+        };
     };
 </script>

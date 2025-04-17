@@ -6,7 +6,7 @@ namespace MarcouEvento.Domain.Entities
 {
     public class Address
     {
-        public Address(int id, string street, int number, string neighborhood, string city, string state, string zipCode, string latitude, string longitude, string complement)
+        public Address(int id, string street, int number, string neighborhood, string city, string state, string zipCode, string latitude, string longitude, string complement, string urlMaps)
         {
             Id = id;
             Street = street;
@@ -20,9 +20,10 @@ namespace MarcouEvento.Domain.Entities
             Complement = complement;
 
             Validate();
+            UrlMaps = urlMaps;
         }
 
-        public Address(string street, int number, string neighborhood, string city, string state, string zipCode, string complement)
+        public Address(string street, int number, string neighborhood, string city, string state, string zipCode, string complement, string urlMaps)
         {
             Street = street;
             Number = number;
@@ -33,13 +34,11 @@ namespace MarcouEvento.Domain.Entities
             Complement = complement;
 
             Validate();
+            UrlMaps = urlMaps;
         }
 
-        public Address(string street, int number, string neighborhood, string city, string state, string zipCode, string latitude, string longitude, string complement)
+        public Address( string city, string state, string zipCode, string latitude, string longitude, string complement, string urlMaps)
         {
-            Street = street;
-            Number = number;
-            Neighborhood = neighborhood;
             City = city;
             State = state;
             ZipCode = zipCode;
@@ -48,6 +47,7 @@ namespace MarcouEvento.Domain.Entities
             Complement = complement;
 
             Validate();
+            UrlMaps = urlMaps;
         }
 
         public enum EType
@@ -75,6 +75,7 @@ namespace MarcouEvento.Domain.Entities
         public string ZipCode { get; private set; }
         public string Latitude { get; private set; }
         public string Longitude { get; private set; }
+        public string? UrlMaps { get; private set; }
         public string Complement { get; private set; }
 
         private bool IsValidZipCode()

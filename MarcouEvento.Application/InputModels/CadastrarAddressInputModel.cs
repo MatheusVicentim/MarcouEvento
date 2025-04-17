@@ -20,7 +20,7 @@ public class CadastrarAddressInputModel
         , ErrorMessage = "Rua deve ser preenchido quando Latitude/Longitude não for fornecida")]
     [MaxLength(1000, ErrorMessage = "Nome da rua tem tamanho máximo de 1000 caracteres")]
     [DisplayName("Rua")]
-    public string? Streat { get; set; }
+    public string? Street { get; set; }
 
     [Required(ErrorMessage = "Número deve ser preenchido")]
     [DisplayName("Número")]

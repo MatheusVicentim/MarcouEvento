@@ -23,7 +23,9 @@ public class AddressService : IAddressService
     {
         var addressEntity = new Address(cadastrarAddressInputModel.City, cadastrarAddressInputModel.State,
             cadastrarAddressInputModel.ZipCode, cadastrarAddressInputModel.Latitude, cadastrarAddressInputModel.Longitude,
-            cadastrarAddressInputModel.Complement, cadastrarAddressInputModel.UrlMaps);
+            cadastrarAddressInputModel.Complement, cadastrarAddressInputModel.UrlMaps, cadastrarAddressInputModel.Type);
+
+        addressEntity.RemoveMaskZipCode();
 
         await _addressRepository.Create(addressEntity);
     }
@@ -44,27 +46,57 @@ public class AddressService : IAddressService
         var addressesEntity = await _addressRepository.GetAddresses();
 
         var addressesViewModel = addressesEntity.Select(x =>
-           new AddressViewModel(x.Id, x.Type, x.Street, x.Number, x.Neighborhood, x.City, x.State, x.ZipCode, x.Latitude, x.Longitude, x.Complement)
+           new AddressViewModel(x.Id, x.Type, x.Street, x.Number, x.Neighborhood, x.City, x.State, x.ZipCode, x.Latitude, x.Longitude, x.Complement, x.UrlMaps)
         );
 
         return addressesViewModel;
     }
 
-    public async Task<AddressDTO> GetById(int id)
+    public async Task<AddressViewModel> GetById(int id)
     {
         var addressEntity = await _addressRepository.GetById(id);
-        return _mapper.Map<AddressDTO>(addressEntity);
+        var addressViewModel = new AddressViewModel(addressEntity.Id, addressEntity.Type, addressEntity.Street, addressEntity.Number,
+            addressEntity.Neighborhood, addressEntity.City, addressEntity.Street, addressEntity.ZipCode, addressEntity.Latitude,
+            addressEntity.Longitude, addressEntity.Complement, addressEntity.UrlMaps);
+
+        return addressViewModel;
+    }
+
+    public async Task<EditAddressInputModel> PraparaUpdate(int id)
+    {
+        var addressEntity = await _addressRepository.GetById(id);
+        var addressCdastrarInputModel = new EditAddressInputModel
+        {
+            Id = addressEntity.Id,
+            Type = addressEntity.Type,
+            Street = addressEntity.Street,
+            Number = addressEntity.Number,
+            Neighborhood = addressEntity.Neighborhood,
+            City = addressEntity.City,
+            State = addressEntity.State,
+            ZipCode = addressEntity.ZipCode,
+            Latitude = addressEntity.Latitude,
+            Longitude = addressEntity.Longitude,
+            Complement = addressEntity.Complement,
+            UrlMaps = addressEntity.UrlMaps
+        };
+
+        return addressCdastrarInputModel;
     }
 
     public CadastrarAddressInputModel PreparaInsert()
     {
         return new CadastrarAddressInputModel();
     }
-
-    public async Task Update(AddressDTO addressDTO)
+        
+    public async Task Update(EditAddressInputModel editAddressInputModel)
     {
-        var addressEntity = _mapper.Map<Address>(addressDTO);
-        await _addressRepository.Update(addressEntity);
+        if(editAddressInputModel == null)
+            throw new NullReferenceException("Address not found");
+
+        var addressEntity = new Address(editAddressInputModel.Id, editAddressInputModel.Street, editAddressInputModel.Number, editAddressInputModel.Neighborhood,
+            editAddressInputModel.City, editAddressInputModel.State, editAddressInputModel.ZipCode, editAddressInputModel.Latitude, editAddressInputModel.Longitude,
+            editAddressInputModel.Complement, editAddressInputModel.UrlMaps, editAddressInputModel.Type);
         await _addressRepository.Update(addressEntity);
     }
 }

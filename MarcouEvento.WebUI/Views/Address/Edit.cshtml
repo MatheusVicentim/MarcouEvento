@@ -1,4 +1,4 @@
-﻿@model MarcouEvento.Application.InputModels.CadastrarAddressInputModel;
+﻿@model MarcouEvento.Application.InputModels.EditAddressInputModel;
 
 @{
     ViewData["Title"] = "Registro de Endereço";
@@ -24,7 +24,7 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<form action="Create" method="post">
+<form asp-action="Edit" method="post">
     <div class="form-horizontal">
         <hr />
 
@@ -34,7 +34,7 @@
             <div class="form-floating mb-3 col-md-3 in-line-block">
                 <input asp-for="ZipCode" class="form-control" placeholder="" />
                 <label asp-for="ZipCode"></label>
-                <span asp-validation-for="ZipCode" class="text-danger"></span>
+                <span asp-validation-for="ZipCode" class="text-danger zipCode-mensage"></span>
             </div>
 
             <div class="form-floating mb-3 col-md-3 in-line-block">
@@ -55,11 +55,8 @@
                     <div class="form-group center-buttons">
                         @foreach (var typeOption in Model.TypeOptions)
                         {
-                            @* <label for="Type_@typeOption.Value">@typeOption.Description</label>
-                <input type="radio" id="Type_@typeOption.Value" name="Type" value="@typeOption.Value" checked="@typeOption.IsSelected" /> *@
-                            <input type="radio" class="btn-check" onclick="formatTypeAddress(this)" name="Type" id="Type_@typeOption.Value" autocomplete="off" value="@typeOption.Value">
+                            <input type="radio" class="btn-check" onclick="formatTypeAddress(this)" name="Type" id="Type_@typeOption.Value" autocomplete="off" value="@typeOption.Value" @typeOption.IsSelected: checked>
                             <label class="btn btn-outline-primary" for="Type_@typeOption.Value">@typeOption.Description</label>
-
                         }
                     </div>
                 </div>
@@ -129,10 +126,19 @@
     </div>
 </form>
 
-@* <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> *@
-
-
 <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        const checks = Array.from(document.getElementsByClassName("btn-check"));
+        checks.forEach((check) => {
+            if(check.checked) {formatTypeAddress(check)};
+        });
+    });
+
+    // Adiciona evento de input ao campo CEP
+    // document.getElementById('ZipCode').addEventListener('input', function() {
+    //   mascaraCep(this);
+    // });
+
     /**
     * Formata Campos
     *
@@ -183,7 +189,6 @@
     };
 </script>
 
-
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function() {
         const zipCode = document.getElementById("ZipCode");
@@ -221,7 +226,7 @@
 
         // Aplica a máscara 00000-000
         if (valor.length > 5) {
-        valor = valor.replace(/^(\d{5})(\d{1,3}).*/, '$1-$2');
+            valor = valor.replace(/^(\d{5})(\d{1,3}).*/, '$1-$2');
         }
 
         // Atualiza o valor no campo

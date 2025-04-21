@@ -1,11 +1,12 @@
 ﻿using MarcouEvento.Domain.Entities;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 namespace MarcouEvento.Application.ViewModels;
 
 public class AddressViewModel
 {
-    public AddressViewModel(int id, Address.EType type, string? streat, int number, string? neighborhood, string? city, string? state, string? zipCode, string? latitude, string? longitude, string? complement)
+    public AddressViewModel(int id, Address.EType type, string? streat, int number, string? neighborhood, string? city, string? state, string? zipCode, string? latitude, string? longitude, string? complement, string? urlMaps)
     {
         Id = id;
         Type = type;
@@ -18,6 +19,7 @@ public class AddressViewModel
         Latitude = latitude;
         Longitude = longitude;
         Complement = complement;
+        UrlMaps = urlMaps;
     }
 
     public int Id { get; set; }
@@ -39,11 +41,19 @@ public class AddressViewModel
     [DisplayName("UF")]
     public string? State { get; set; }
 
+    private string? _ZipCode;
     [DisplayName("CEP")]
-    public string? ZipCode { get; set; }
+    public string? ZipCode
+    {
+        get => _ZipCode;
+        set => _ZipCode = Regex.Replace(value, "^(\\d{5})(\\d{1,3}).*", "$1-$2");
+    }
 
     public string? Latitude { get; set; }
     public string? Longitude { get; set; }
+
+    [DisplayName("Url Maps")]
+    public string? UrlMaps { get; set; }
 
     [DisplayName("Complemento")]
     public string? Complement { get; private set; }

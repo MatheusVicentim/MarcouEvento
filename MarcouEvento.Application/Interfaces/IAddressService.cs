@@ -7,9 +7,10 @@ namespace MarcouEvento.Application.Interfaces;
 public interface IAddressService
 {
     Task<IEnumerable<AddressViewModel>> GetAddresses();
-    Task<AddressDTO> GetById(int id);
+    Task<AddressViewModel> GetById(int id);
     CadastrarAddressInputModel PreparaInsert();
     Task Add(CadastrarAddressInputModel cadastrarAddressInputModel);
-    Task Update(AddressDTO addressDTO);
+    Task<EditAddressInputModel> PraparaUpdate(int id);
+    Task Update(EditAddressInputModel addressDTO);
     Task Delete(int id);
 }

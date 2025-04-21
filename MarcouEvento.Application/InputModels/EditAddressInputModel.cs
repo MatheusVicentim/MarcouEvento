@@ -6,13 +6,14 @@ using static MarcouEvento.Domain.Entities.Address;
 
 namespace MarcouEvento.Application.InputModels;
 
-public class CadastrarAddressInputModel
+public class EditAddressInputModel
 {
-    public CadastrarAddressInputModel()
+    public EditAddressInputModel()
     {
         TypeOptions = GetTypeOptions();
     }
 
+    public int Id { get; set; }
     public Address.EType Type { get; set; }
     public IEnumerable<AddressTypeOption> TypeOptions { get; set; }
 
@@ -35,18 +36,18 @@ public class CadastrarAddressInputModel
     [Required(ErrorMessage = "Cidade deve ser preenchido")]
     [MaxLength(1000, ErrorMessage = "Nome da cidade tem tamanho máximo de 1000 caracteres")]
     [DisplayName("Cidade")]
-    public string? City { get; set; }
+    public string City { get; set; }
 
     [Required(ErrorMessage = "UF deve ser preenchido")]
     [MaxLength(2, ErrorMessage = "UF tem tamanho máximo de 2 caracteres")]
     [DisplayName("UF")]
-    public string? State { get; set; }
+    public string State { get; set; }
 
     [Required(ErrorMessage = "CEP deve ser preenchido")]
     [MaxLength(9, ErrorMessage = "CEP tem tamanho máximo de 9 caracteres")]
-    [MinLength(8, ErrorMessage = "CEP tem tamanho minimo de 8 caracteres")]
+    [MinLength(8, ErrorMessage = "CEP tem tamanho máximo de 8 caracteres")]
     [DisplayName("CEP")]
-    public string? ZipCode { get; set; }
+    public string ZipCode { get; set; }
 
     public string? Latitude { get; set; }
     public string? Longitude { get; set; }

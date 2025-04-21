@@ -39,4 +39,50 @@ public class AddressController : Controller
         }
         return View(cadastrarAddressInputModel);
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Delete(int? id)
+    {
+        if (id == null)
+            return NotFound();
+
+        await _addressService.Delete(id.Value);
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Edit(int? id)
+    {
+        if (id == null)
+            return NotFound();
+
+        var address = await _addressService.PraparaUpdate(id.Value);
+        if (address == null)
+            return NotFound();
+        return View(address);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(EditAddressInputModel editAddressInputModel)
+    {
+        if (ModelState.IsValid)
+        {
+            await _addressService.Update(editAddressInputModel);
+            return RedirectToAction(nameof(Index));
+        }
+        return View(editAddressInputModel);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Details(int? id)
+    {
+        if(id == null) return NotFound();
+
+        var addressViewModel = await _addressService.GetById(id.Value);
+        if (addressViewModel == null) return NotFound();
+
+        return View(addressViewModel);
+
+    }
 }

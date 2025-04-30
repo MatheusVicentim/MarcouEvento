@@ -25,34 +25,51 @@ namespace MarcouEvento.Domain.Entities
             Type = type;
         }
 
-        public Address(string street, int number, string neighborhood, string city, string state, string zipCode, string complement, string urlMaps, EType type)
+        public Address(string street, EType type, int number, string neighborhood, string city, string state, string zipCode, string latitude, string longitude, string urlMaps, string complement)
         {
             Street = street;
+            Type = type;
             Number = number;
             Neighborhood = neighborhood;
             City = city;
             State = state;
             ZipCode = zipCode;
-            Complement = complement;
-
-            Validate();
-            UrlMaps = urlMaps;
-            Type = type;
-        }
-
-        public Address(string city, string state, string zipCode, string latitude, string longitude, string complement, string urlMaps, EType type)
-        {
-            City = city;
-            State = state;
-            ZipCode = zipCode;
             Latitude = latitude;
             Longitude = longitude;
-            Complement = complement;
 
             Validate();
             UrlMaps = urlMaps;
-            Type = type;
+            Complement = complement;
         }
+
+        //public Address(string street, int number, string neighborhood, string city, string state, string zipCode, string complement, string urlMaps, EType type)
+        //{
+        //    Street = street;
+        //    Number = number;
+        //    Neighborhood = neighborhood;
+        //    City = city;
+        //    State = state;
+        //    ZipCode = zipCode;
+        //    Complement = complement;
+
+        //    Validate();
+        //    UrlMaps = urlMaps;
+        //    Type = type;
+        //}
+
+        //public Address(string city, string state, string zipCode, string latitude, string longitude, string complement, string urlMaps, EType type)
+        //{
+        //    City = city;
+        //    State = state;
+        //    ZipCode = zipCode;
+        //    Latitude = latitude;
+        //    Longitude = longitude;
+        //    Complement = complement;
+
+        //    Validate();
+        //    UrlMaps = urlMaps;
+        //    Type = type;
+        //}
 
         public enum EType
         {

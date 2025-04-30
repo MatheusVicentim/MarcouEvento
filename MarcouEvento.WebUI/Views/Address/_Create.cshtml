@@ -1,0 +1,109 @@
+﻿@model MarcouEvento.Application.InputModels.CadastrarAddressInputModel;
+
+@{
+    ViewData["TitleAddress"] = "Endereço";
+}
+
+<h4>@ViewData["TitleAddress"]</h4>
+
+<div class="form-horizontal">
+    <hr />
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row g-2">
+        <div class="form-floating mb-3 col-md-3 in-line-block">
+            <input asp-for="ZipCode" id="ZipCode" class="form-control" placeholder="" />
+            <label asp-for="ZipCode"></label>
+            <span asp-validation-for="ZipCode" class="text-danger"></span>
+        </div>
+
+        <div class="form-floating mb-3 col-md-3 in-line-block">
+            <input asp-for="State" id="State" class="form-control" placeholder="s" />
+            <label asp-for="State"></label>
+            <span asp-validation-for="State" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3 col-md-6 in-line-block">
+            <input asp-for="City" id="City" class="form-control" placeholder="s" />
+            <label asp-for="City"></label>
+            <span asp-validation-for="City" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="border border-secondary-subtle p-1 mb-3">
+        <div class="row mt-1">
+            <div class="col-12 mb-3">
+                <div class="form-group center-buttons">
+                    @foreach (var typeOption in Model.TypeOptions)
+                    {
+                        @* <label for="Type_@typeOption.Value">@typeOption.Description</label>
+                <input type="radio" id="Type_@typeOption.Value" name="Type" value="@typeOption.Value" checked="@typeOption.IsSelected" /> *@
+                        <input type="radio" class="btn-check" onclick="formatTypeAddress(this)" name="Type" id="Type_@typeOption.Value" autocomplete="off" value="@typeOption.Value">
+                        <label class="btn btn-outline-primary" for="Type_@typeOption.Value">@typeOption.Description</label>
+
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="address mt-1" style="display:none;">
+            <div class="row g-2">
+                <div class="form-floating mb-3 col-md-5 in-line-block">
+                    <input asp-for="Neighborhood" id="Neighborhood" class="form-control" placeholder="" />
+                    <label asp-for="Neighborhood"></label>
+                    <span asp-validation-for="Neighborhood" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3 col-md-6 in-line-block">
+                    <input asp-for="Street" id="Street" class="form-control" placeholder="" />
+                    <label asp-for="Street"></label>
+                    <span asp-validation-for="Street" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3 col-md-1 in-line-block">
+                    <input asp-for="Number" id="Number" class="form-control" placeholder="" />
+                    <label asp-for="Number"></label>
+                    <span asp-validation-for="Number" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="address-rural-4" style="display:none;">
+            <div class="row g-2">
+                <div class="form-floating mb-3 col-md-6 in-line-block">
+                    <input asp-for="Latitude" id="Latitude" class="form-control" placeholder="" />
+                    <label asp-for="Latitude"></label>
+                    <span asp-validation-for="Latitude" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3 col-md-6 in-line-block">
+                    <input asp-for="Longitude" id="Longitude" class="form-control" placeholder="" />
+                    <label asp-for="Longitude"></label>
+                    <span asp-validation-for="Longitude" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row g-2">
+        <div class="form-floating mb-3 col-md-12 in-line-flex">
+            <input asp-for="UrlMaps" , id="UrlMaps" class="form-control" placeholder="" onchange="habilitaBtnUrlMaps(this)" />
+            <label asp-for="UrlMaps"></label>
+            <span asp-validation-for="UrlMaps" class="text-danger"></span>
+            <button type="button" class="btn btn-info m-l-1" style="width:50px;" id="openUrlMaps" onclick="openUrl()">
+                <i class="fa-solid fa-location-dot"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="row g-2">
+        <div class="form-floating mb-3 col-md-12 in-line-block">
+            <textarea asp-for="Complement" id="Complement" class="form-control" placeholder=""></textarea>
+            <label asp-for="Complement"></label>
+            <span asp-validation-for="Complement" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+
+@* <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> *@

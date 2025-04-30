@@ -1,7 +1,7 @@
 ﻿@model MarcouEvento.Application.InputModels.CadastrarAddressInputModel;
 
 @{
-    ViewData["Title"] = "Registro de Endereço";
+    // ViewData["Title"] = "Registro de Endereço";
 }
 
 <style>
@@ -191,10 +191,12 @@
 
         // Consulta o CEP quando sair do campo (se tiver 8 dígitos)
         zipCode.addEventListener('blur', async function() {
-            if (this.value.length === 8) {
+            const cepNumber = this.value.replace(/[^\d]/g, "");
+
+            if (cepNumber.length === 8) {
                 try {
                     // Aguarda a conclusão da consulta
-                    const dataViaCep = await consultarCEP(zipCode);
+                    const dataViaCep = await consultarCEP(this);
                     // Só chama a função quando os dados estiverem disponíveis
                     setDadosViaCep(dataViaCep);
                 } catch (error) {

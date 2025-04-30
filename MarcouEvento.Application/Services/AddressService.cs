@@ -21,9 +21,9 @@ public class AddressService : IAddressService
 
     public async Task Add(CadastrarAddressInputModel cadastrarAddressInputModel)
     {
-        var addressEntity = new Address(cadastrarAddressInputModel.City, cadastrarAddressInputModel.State,
-            cadastrarAddressInputModel.ZipCode, cadastrarAddressInputModel.Latitude, cadastrarAddressInputModel.Longitude,
-            cadastrarAddressInputModel.Complement, cadastrarAddressInputModel.UrlMaps, cadastrarAddressInputModel.Type);
+        var addressEntity = new Address(cadastrarAddressInputModel.City, cadastrarAddressInputModel.Type, cadastrarAddressInputModel.Number,
+            cadastrarAddressInputModel.Neighborhood, cadastrarAddressInputModel.City, cadastrarAddressInputModel.State, cadastrarAddressInputModel.ZipCode,
+            cadastrarAddressInputModel.Latitude, cadastrarAddressInputModel.Longitude, cadastrarAddressInputModel.UrlMaps, cadastrarAddressInputModel.Complement);
 
         addressEntity.RemoveMaskZipCode();
 
@@ -88,10 +88,10 @@ public class AddressService : IAddressService
     {
         return new CadastrarAddressInputModel();
     }
-        
+
     public async Task Update(EditAddressInputModel editAddressInputModel)
     {
-        if(editAddressInputModel == null)
+        if (editAddressInputModel == null)
             throw new NullReferenceException("Address not found");
 
         var addressEntity = new Address(editAddressInputModel.Id, editAddressInputModel.Street, editAddressInputModel.Number, editAddressInputModel.Neighborhood,

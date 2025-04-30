@@ -1,5 +1,4 @@
-﻿
-function consultarCEP(cepInput) {
+﻿function consultarCEP(cepInput) {
     console.log(cepInput)
     const cep = cepInput.value.replace(/\D/g, '');
 
@@ -58,12 +57,12 @@ function consultarCEP(cepInput) {
 function exibirMensagem(texto, zipCodeElement) {
     const parentElement = zipCodeElement.parentElement;
     const spanElement = parentElement.querySelector("span");
-    spanElement.textCont = texto;
+    spanElement.innerHTML = texto;
 }
 
 // Função para remover mensagens
 function removerMensagem(zipCodeElement) {
     const parentElement = zipCodeElement.parentElement;
     const spanElement = parentElement.querySelector("span");
-    spanElement.textCont = "";
+    spanElement.innerHTML = "";
 }

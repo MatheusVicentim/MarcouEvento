@@ -1,0 +1,187 @@
+﻿@model MarcouEvento.Application.InputModels.CadastrarPartyInputModel;
+
+@{
+    ViewData["Title"] = "Registro de Festa";
+}
+
+<style>
+    .in-line-block {
+        display: inline-block;
+    }
+
+    .in-line-flex {
+        display: inline-flex;
+    }
+
+    .center-buttons {
+        text-align: center;
+    }
+
+    .m-l-1 {
+        margin-left: 1rem;
+    }
+</style>
+
+<h2>@ViewData["Title"]</h2>
+
+<form action="Create" method="post">
+    <div class="form-horizontal">
+        <hr />
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row g-2">
+            <div class="form-floating mb-3 col-md-6 in-line-block">
+                <input asp-for="Name" class="form-control" placeholder="" />
+                <label asp-for="Name"></label>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3 col-md-3 in-line-block">
+                <input asp-for="DateStart" class="form-control" type="datetime-local" placeholder="" />
+                <label asp-for="DateStart"></label>
+                <span asp-validation-for="DateStart" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3 col-md-3 in-line-block">
+                <input asp-for="DateFinish" class="form-control" type="datetime-local" placeholder="" />
+                <label asp-for="DateFinish"></label>
+                <span asp-validation-for="DateFinish" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row g-2">
+            <div class="form-floating mb-3 col-md-12 in-line-block">
+                <textarea asp-for="Description" class="form-control" placeholder=""></textarea>
+                <label asp-for="Description"></label>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+
+        @* <partial name="../Address/_Create" model="Model.Address"/> *@
+        <partial name="../Address/_Create" for="Address" />
+    </div>
+
+    <div class="row g-2">
+        <button type="submit" class="btn btn-primary">Registrar</button>
+    </div>
+</form>
+
+@* <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> *@
+
+
+<script type="text/javascript">
+    /**
+    * Formata Campos
+    *
+    * @@param {HTMLInputElement} element - Descrição de possíveis exceções lançadas
+    */
+    function formatTypeAddress(element){
+        const dadosAddress = document.getElementsByClassName("address")[0];
+        const dadosAddressRural = document.getElementsByClassName("address-rural-4")[0];
+
+        switch(Number(element.value)){
+            case 4:
+                dadosAddress.style.display = "none";
+                dadosAddressRural.style.display = "block";
+
+                break;
+            default:
+                dadosAddress.style.display = "block";
+                dadosAddressRural.style.display = "none";
+        }
+    };
+
+    function openUrl(){
+        const url = document.getElementById('UrlMaps').value.trim();
+
+        if(url){
+            window.open(url, '_blank');
+        }
+    };
+
+    /**
+    *
+    *
+    * @@param {HTMLInputElement} element - Descrição de possíveis exceções lançadas
+    */
+    function habilitaBtnUrlMaps(element){
+        const url = element.value;
+        const btnUrl = document.getElementById('openUrlMaps');
+        if(url){
+            let formattedUrl = url;
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                btnUrl.setAttribute('disabled', true);
+            }else{
+                btnUrl.removeAttribute('disabled');
+            }
+        }else{
+            btnUrl.setAttribute('disabled', true);
+        };
+    };
+</script>
+
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        const zipCode = document.getElementById("ZipCode");
+        mascaraCep(zipCode)
+
+        // Consulta o CEP quando sair do campo (se tiver 8 dígitos)
+        zipCode.addEventListener('blur', async function() {
+            console.log(this.value)
+            const cepNumber = this.value.replace(/[^\d]/g, "");
+
+            if (cepNumber.length === 8) {
+                try {
+                    // Aguarda a conclusão da consulta
+                    const dataViaCep = await consultarCEP(this);
+                    // Só chama a função quando os dados estiverem disponíveis
+                    setDadosViaCep(dataViaCep);
+                } catch (error) {
+                    console.error("Erro ao consultar CEP:", error);
+                }
+            }
+
+            mascaraCep(this);
+        });
+    });
+
+        /**
+        * Aplica máscara de CEP ao campo input
+        *
+        * @@param {HTMLInputElement} input - O elemento input para aplicar a máscara
+        * @@returns {void}
+        */
+    function mascaraCep(input) {
+        // Remove todos os caracteres não numéricos
+        let valor = input.value.replace(/\D/g, '');
+
+        // Limita a 8 dígitos
+        valor = valor.substring(0, 8);
+
+        // Aplica a máscara 00000-000
+        if (valor.length > 5) {
+        valor = valor.replace(/^(\d{5})(\d{1,3}).*/, '$1-$2');
+        }
+
+        // Atualiza o valor no campo
+        input.value = valor;
+    }
+
+    function setDadosViaCep(data){
+        const zipCode = document.getElementById("ZipCode");
+        exibirMensagem("", zipCode);
+
+        if (data.erro) {
+            exibirMensagem("CEP não encontrado.", zipCode);
+            return;
+        }
+
+        // Preenche os campos com os dados retornados
+        document.getElementById("Street").value = data.logradouro;
+        document.getElementById("Neighborhood").value = data.bairro;
+        document.getElementById("City").value = data.localidade;
+        document.getElementById("State").value = data.uf;
+        document.getElementById("Complement").innerHTML = data.complemento || '';
+    };
+</script>
